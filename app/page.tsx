@@ -20,7 +20,6 @@ export default function HomePage() {
         </h1>
         <p className="text-[1.0625rem] text-gray-600 leading-relaxed max-w-[500px] mb-10">
           Economics and business research papers, broken down into plain English.
-          No jargon. No paywalls. Just the ideas that matter.
         </p>
         <div className="flex items-center gap-5">
           <Link
