@@ -34,23 +34,35 @@ export default async function ArticlePage({ params }: Props) {
   }
 
   return (
-    <article>
+    <div className="max-w-3xl mx-auto px-6 py-12">
+
       {/* Back */}
       <Link
-        href="/"
-        className="inline-block text-sm text-gray-400 hover:text-blue-600 transition-colors mb-10"
+        href="/blog"
+        className="inline-block text-sm text-gray-400 hover:text-blue-600 transition-colors mb-10
+                   animate-fade-in"
       >
-        ← All articles
+        Back to blog
       </Link>
 
       {/* Header */}
-      <header className="mb-10">
-        <h1 className="text-[1.75rem] font-bold text-gray-900 leading-[1.25] tracking-tight mb-6">
+      <header className="mb-10 animate-fade-up stagger-1">
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {article.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-[11px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <h1 className="text-[1.875rem] font-bold text-gray-900 leading-[1.25] tracking-tight mb-5">
           {article.title}
         </h1>
 
-        {/* Meta */}
-        <div className="space-y-1.5 text-sm text-gray-500 mb-6">
+        <div className="space-y-1.5 text-sm text-gray-500">
           <div className="flex items-center gap-2 flex-wrap">
             {article.date && (
               <time dateTime={article.date}>
@@ -61,8 +73,10 @@ export default async function ArticlePage({ params }: Props) {
             <span>{article.readTime}</span>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap text-gray-500">
-            <span className="font-medium">{sourceTypeLabel(article.sourceType)}</span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="font-medium text-gray-700">
+              {sourceTypeLabel(article.sourceType)}
+            </span>
             {article.source && (
               <>
                 <span className="text-gray-300">·</span>
@@ -72,7 +86,7 @@ export default async function ArticlePage({ params }: Props) {
           </div>
 
           {article.authors && (
-            <div className="text-gray-400">{article.authors}</div>
+            <p className="text-gray-400">{article.authors}</p>
           )}
 
           {article.paperUrl && (
@@ -81,44 +95,38 @@ export default async function ArticlePage({ params }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700
-                         transition-colors no-underline font-medium text-sm mt-1"
+                         transition-colors font-medium text-sm pt-1"
             >
-              View original paper ↗
+              View original paper
             </a>
           )}
         </div>
 
-        {/* Tags */}
-        {article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[11px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        {article.summary && (
+          <p className="mt-6 text-[1rem] text-gray-600 leading-relaxed
+                        border-l-2 border-blue-200 pl-4">
+            {article.summary}
+          </p>
         )}
 
-        <div className="mt-8 border-t border-gray-100" />
+        <div className="mt-8 border-t border-[#e8e6e0]" />
       </header>
 
       {/* Body */}
-      <div className="prose prose-sm max-w-none">
+      <div className="prose prose-sm max-w-none animate-fade-up stagger-2">
         <MDXRemote source={article.content} />
       </div>
 
       {/* Footer */}
-      <div className="mt-16 pt-8 border-t border-gray-100">
+      <div className="mt-16 pt-8 border-t border-[#e8e6e0]">
         <Link
-          href="/"
+          href="/blog"
           className="text-sm text-gray-400 hover:text-blue-600 transition-colors"
         >
-          ← All articles
+          Back to blog
         </Link>
       </div>
-    </article>
+
+    </div>
   );
 }
