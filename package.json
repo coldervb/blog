@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node -e \"const fs=require('fs'),path=require('path');const p='.next/standalone/.next/server';fs.mkdirSync(p,{recursive:true});const f=path.join(p,'pages-manifest.json');if(!fs.existsSync(f))fs.writeFileSync(f,'{}');\"",
     "start": "next start",
     "lint": "next lint"
   },
