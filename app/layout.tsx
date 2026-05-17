@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import "./globals.css";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "800"],
+  style: ["normal", "italic"],
+});
 
 export const metadata: Metadata = {
   title: { default: "The Decoded", template: "%s — The Decoded" },
@@ -13,19 +20,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en" className={`${geist.variable} ${playfair.variable}`}>
       <body className="font-sans bg-paper text-gray-900 min-h-screen">
 
         {/* ── Header ── */}
-        <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur-sm border-b border-[#e8e6e0]">
-          <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+        <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-sm border-b border-[#ddd9d0]">
+          <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
             <Link
               href="/"
-              className="text-[15px] font-semibold text-gray-900 tracking-tight hover:text-blue-600 transition-colors"
+              className="font-serif text-[1.125rem] font-bold italic text-gray-900 hover:text-accent transition-colors"
             >
               The Decoded
             </Link>
-            <nav className="flex items-center gap-7">
+            <nav className="flex items-center gap-8">
               <NavLink href="/">Home</NavLink>
               <NavLink href="/blog">Blog</NavLink>
               <NavLink href="/about">About</NavLink>
@@ -36,11 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
 
         {/* ── Footer ── */}
-        <footer className="border-t border-[#e8e6e0] mt-24">
-          <div className="max-w-3xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <footer className="border-t border-[#ddd9d0] mt-24 bg-paper-dark">
+          <div className="max-w-3xl mx-auto px-6 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-semibold text-gray-900">The Decoded</p>
-              <p className="text-xs text-gray-400 mt-0.5">
+              <p className="font-serif text-base font-bold italic text-gray-900">The Decoded</p>
+              <p className="text-xs text-gray-500 mt-1">
                 Economics and business research, broken down clearly.
               </p>
             </div>

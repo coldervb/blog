@@ -14,8 +14,8 @@ export default function BlogPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-14">
 
-      <div className="mb-12 animate-fade-up stagger-1">
-        <h1 className="text-3xl font-bold text-gray-900 tracking-tight mb-2">
+      <div className="mb-10 pb-8 border-b border-[#ddd9d0] animate-fade-up stagger-1">
+        <h1 className="font-serif text-4xl font-bold text-gray-900 mb-2">
           All Articles
         </h1>
         <p className="text-[15px] text-gray-500">
@@ -23,28 +23,36 @@ export default function BlogPage() {
         </p>
       </div>
 
-      <div className="divide-y divide-[#e8e6e0]">
+      <div className="space-y-5">
         {articles.map((article, i) => (
           <article
             key={article.slug}
-            className={`py-7 group animate-fade-up stagger-${Math.min(i + 2, 8)}`}
+            className={`animate-fade-up stagger-${Math.min(i + 2, 8)}`}
           >
-            <Link href={`/articles/${article.slug}`} className="block">
-
-              <div className="flex items-start justify-between gap-6 mb-2">
-                <h2 className="text-[1rem] font-semibold text-gray-900 leading-snug
-                               group-hover:text-blue-600 transition-colors">
-                  {article.title}
-                </h2>
+            <Link
+              href={`/articles/${article.slug}`}
+              className="group block bg-white border border-[#ddd9d0] rounded-lg p-6
+                         hover:border-accent hover:shadow-sm transition-all"
+            >
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <p className="text-[11px] font-semibold text-accent uppercase tracking-widest">
+                  {sourceTypeLabel(article.sourceType)}
+                  {article.source && ` · ${article.source}`}
+                </p>
                 <time
                   dateTime={article.date}
-                  className="shrink-0 text-xs text-gray-400 pt-0.5 tabular-nums whitespace-nowrap"
+                  className="shrink-0 text-xs text-gray-400 tabular-nums whitespace-nowrap"
                 >
                   {format(parseISO(article.date), "MMM d, yyyy")}
                 </time>
               </div>
 
-              <p className="text-sm text-gray-500 leading-relaxed mb-4">
+              <h2 className="font-serif text-[1.2rem] font-bold text-gray-900 leading-snug mb-3
+                             group-hover:text-accent transition-colors">
+                {article.title}
+              </h2>
+
+              <p className="text-[0.9375rem] text-gray-600 leading-relaxed mb-4">
                 {article.summary}
               </p>
 
@@ -53,7 +61,7 @@ export default function BlogPage() {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[11px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"
+                      className="text-[11px] text-accent bg-accent-pale px-2.5 py-0.5 rounded"
                     >
                       {tag}
                     </span>
@@ -61,12 +69,6 @@ export default function BlogPage() {
                 </div>
                 <span className="text-xs text-gray-400 shrink-0">{article.readTime}</span>
               </div>
-
-              <p className="text-[11px] text-gray-400 mt-3">
-                {sourceTypeLabel(article.sourceType)}
-                {article.source && `, ${article.source}`}
-              </p>
-
             </Link>
           </article>
         ))}
