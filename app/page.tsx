@@ -18,7 +18,7 @@ export default function HomePage() {
           <br className="hidden sm:block" />
           <em className="font-normal"> for everyone.</em>
         </h1>
-        <p className="text-[1.0625rem] text-gray-600 leading-relaxed max-w-[500px] mb-10">
+        <p className="text-[1.0625rem] text-gray-600 leading-relaxed mb-10">
           Economics and business research papers, broken down into plain English.
         </p>
         <div className="flex items-center gap-5">
